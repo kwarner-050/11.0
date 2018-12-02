@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='personal_information']//field[@name='marital']" position="replace">
+                     <field name="marital_status"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']//group[1]" position='after'>
+                    <group col="4">
+                        <field name="cititzenship"/>
+                        <field name="singapore_pr_startdate" attrs="{'invisible':[('cititzenship','!=','Singapore PR')]}"/>
+                        <field name="qualification_permit" attrs="{'invisible':[('cititzenship','!=','Foreigner')]}"/>
+                        <field name="e_pass_sdate" attrs="{'invisible':[('qualification_permit','not in',['E Pass','S Pass','Work Permit'])]}"/>
+                        <field name="e_pass_edate" attrs="{'invisible':[('qualification_permit','not in',['E Pass','S Pass','Work Permit'])]}"/>
+                        <field name="worker_qualification" attrs="{'invisible':[('qualification_permit','not in',['S Pass','Work Permit'])]}"/>
+                    </group>
+                    <group col="4">
+                        <field name="ethinic_race"/>
+                        <field name="religion"/>
+                    </group>
+                    <group>
+                        <group string="Statutory Contributions (Please Un-tick if not contributing)">
+                            <field name='contribution_for_sdl' attrs="{'invisible':[('ethinic_race','not in',['Chinese','Indian','Others','Eurasian','Malay'])]}"/>
+                            <field name='contribution_for_mbmf' attrs="{'invisible':[('ethinic_race','not in',['Malay'])]}"/>
+                            <field name='contribution_for_cdac' attrs="{'invisible':[('ethinic_race','not in',['Chinese'])]}"/>
+                            <field name='contribution_for_sinda' attrs="{'invisible':[('ethinic_race','not in',['Indian'])]}"/>
+                            <field name='contribution_for_ecf' attrs="{'invisible':[('ethinic_race','not in',['Eurasian'])]}"/>
+                            <field name='contribution_for_share' attrs="{'invisible':[('ethinic_race','not in',['Chinese','Indian','Others','Eurasian','Malay'])]}"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
