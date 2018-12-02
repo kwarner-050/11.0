@@ -5,8 +5,6 @@
     'version': '11.0',
     'category': 'app',
     'summary': 'r',
-    'price':30.00,
-    'currency':'EUR'
     'description': """
         
     """,
